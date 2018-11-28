@@ -1,0 +1,8 @@
+---
+applications:
+- name: servicevalidation
+  memory: 1024M
+  instances: 1
+  buildpacks: 
+    - java_buildpack_offline
+  path: target/servicevalidation-0.0.1-SNAPSHOT.jar
