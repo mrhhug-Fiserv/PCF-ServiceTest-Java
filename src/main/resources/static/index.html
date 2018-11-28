@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- @Author: Michael Hug -->
+<!--
+ __      __      ___.                           .___ .____    .____   _________  
+/  \    /  \ ____\_ |_________  ____ _____    __| _/ |    |   |    |  \_   ___ \ 
+\   \/\/   _/ __ \| __ \_  __ _/ __ \\__  \  / __ |  |    |   |    |  /    \  \/ 
+ \        /\  ___/| \_\ |  | \\  ___/ / __ \/ /_/ |  |    |___|    |__\     \____
+  \__/\  /  \___  |___  |__|   \___  (____  \____ |  |_______ |_______ \______  /
+       \/       \/    \/           \/     \/     \/          \/       \/      \/ 
+-->
+
+<html>
+    <head>
+        <title>Service Validation</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="img/favicon.ico"/>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <div class="brand" onclick="window.location='.';">
+                <img src="img/bread-72-240738.png"alt="Webread LLC"/>
+                <h3>Webread LLC</h3>
+                <h3>CloudFoundry validation app</h3>
+            </div>
+        </header>
+        <div class="main-content">
+            <nav>
+                <ul>
+                    <li class="nav-btn" id="mysql"><a>MySql</a></li>
+                    <li class="nav-btn" id="rabbit"><a>Rabbit</a></li>
+                    <li class="nav-btn" id="redis"><a>Redis</a></li>
+                    <li class="nav-btn" id="vault"><a>Vault</a></li>
+                    <li class="nav-btn" id="environment"><a>Environment</a></li>
+                    <li class="nav-btn" id="rest"><a>REST API</a></li>
+                </ul>
+                <img class="enterprise-cloud-logo" src="img/bread-72-240738.png" alt="Webread LLC">
+            </nav>
+            <main>
+                <div class="card" id="mysql-card">
+                    <div class="card-contents">
+                        <p>CRUD operations on a MySql database</p>
+                        <div class="form-div">
+                            <input type="number" placeholder="id" id="id">
+                            <input type="text" placeholder="name" id="name">
+                            <input type="text" placeholder="specialty" id="specialty">
+			    <label class="tickbox" for="singer">isSinger<input type="checkbox" id="singer"></label>
+                            <button id="mysql-create-btn" class="btn">create</button>
+                            <button id="mysql-update-btn" class="btn">update</button>
+                            <button id="mysql-createthegreatfuldead-btn" class="btn">create the Greatful Dead</button>
+                            <button id="mysql-readbyid-btn" class="btn">read by id</button>
+                            <button id="mysql-readall-btn" class="btn">read all</button>
+                            <button id="mysql-deletebyid-btn" class="btn">delete by id</button>
+                            <button id="mysql-deleteall-btn" class="btn">delete all</button>
+                        </div>
+                        <p class="response-body" id="response-body-mysql"></p>
+                    </div>
+                </div>
+                <div class="card" id="rabbit-card">
+                    <div class="card-contents">
+                        <p>Produce and consume a with Rabbit</p>
+                        <div class="form-div">
+                            <input type="text" placeholder="message" id="message">
+                            <button id="rabbit-produce-btn" class="btn">produce</button>
+                            <button id="rabbit-consume-btn" class="btn">consume</button>
+                            <button id="rabbit-produceRandom-btn" class="btn">produce 10 Random messages</button>
+                            <button id="rabbit-consumeAll-btn" class="btn">consume all messages</button>
+                            <button id="rabbit-count-btn" class="btn">get queue length</button>
+                        </div>
+                        <p class="response-body" id="response-body-rabbit"></p>
+                    </div>	
+                </div>
+                <div class="card" id="redis-card">
+                    <div class="card-contents">
+                        <p>Key / Value operations on a Redis backend</p>
+                        <div class="form-div">
+                            <input type="text" placeholder="key" id="key">
+                            <input type="text" placeholder="value" id="value">
+                            <button id="redis-get-btn" class="btn">get</button>
+                            <button id="redis-set-btn" class="btn">set</button>
+                            <button id="redis-del-btn" class="btn">del</button>
+                            <button id="redis-getAllKeyValues-btn" class="btn">Get All Pairs</button>
+                            <button id="redis-setRandom-btn" class="btn">Set 10 Random Pairs</button>
+                            <button id="redis-flushAll-btn" class="btn">flushAll</button>
+                        </div>
+                        <p class="response-body" id="response-body-redis"></p>
+                    </div>	
+                </div>
+                <div class="card" id="vault-card">
+                    <div class="card-contents">
+                        <p>Store configuration and secrets with Vault</p>
+                        <div class="form-div">
+                            <input type="text" placeholder="Hunt Name" id="huntName">
+                            <input type="text" placeholder="Starting City" id="startingCity">
+                            <input type="text" placeholder="Number of Paces" id="numPaces">
+                            <button id="vault-create-btn" class="btn">Create Hunt</button>
+                            <button id="vault-get-btn" class="btn">Get Hunt</button>
+                            <button id="vault-list-btn" class="btn">List Hunts</button>
+                            <button id="vault-delete-btn" class="btn">Delete Hunt</button>
+                        </div>
+                        <p class="response-body" id="response-body-vault"></p>
+                    </div>	
+                </div>
+                <div class="card" id="environment-card">
+                    <div class="card-contents">
+                        <p>Display VCAP_SERVICES environmental variable</p>
+                        <div class="form-div">
+                            <button id="environment-display-btn" class="btn">Display</button>
+                        </div>
+                        <p class="response-body" id="response-body-environment"></p>
+                    </div>	
+                </div>
+                <div class="card" id="rest-card">
+                    <div class="card-contents">
+                        <p>Rest API Examples</p>
+                        <p class="response-body" id="response-body-rest"></p>
+                    </div>	
+                </div>
+                <footer>
+                    <p>Copyright &copy; 2018 Webread LLC. All rights reserved.</p>
+                </footer>
+            </main>
+        </div>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/navigation.js"></script>
+        <script src="js/mysql.js"></script>
+        <script src="js/rabbit.js"></script>
+        <script src="js/redis.js"></script>
+        <script src="js/vault.js"></script>
+        <script src="js/vcap_services.js"></script>
+    </body>
+</html>
