@@ -52,6 +52,16 @@ public class WebController {
         return ret;
     }
 
+    @PutMapping("/api/vault/createwinghunt")
+    public VaultResponse createWingHunt() {
+	String huntName = "Lemon Pepper Wings, Wet";
+	String startingCity = "Alpharetta";
+	String numberOfPaces = "285";
+        System.out.println("PUT /api/vault/" + huntName + "/" + startingCity + "/" + numberOfPaces + " was called");
+        TreasureHunt th = new TreasureHunt(startingCity, numberOfPaces);
+        return vaultTemplate.write(Static.root + "/" + huntName, th);
+    }
+
     @GetMapping("/api/vault/list")
     public List<String> listKeys() {
         System.out.println("GET /api/vault/list was called");

@@ -57,6 +57,27 @@ $('#vault-get-btn').click(function() {
     }
 });
 
+$('#vault-create-wing-hunt').click(function() {
+    var url="api/vault/createwinghunt";
+    var method = 'PUT';
+    console.log("Calling: " + method + " " + url);
+    $('#response-body-vault').html('Calling REST endpoint');
+    $.ajax({
+        type: method,
+        url: url,
+        success: function(){
+            $('#response-body-vault').html("ok");
+        },
+        error: function(xhr, status, error) {
+                console.error("status: : " + status);
+                console.error("error: " + error);
+                console.error("xhr: " + xhr);
+                $('#response-body-vault').html("ERROR! Is the vault service bound?");
+        },
+        timeout: 7000,
+    });
+});
+
 $('#vault-list-btn').click(function() {
     var url="api/vault/list";
     var method = 'GET';
