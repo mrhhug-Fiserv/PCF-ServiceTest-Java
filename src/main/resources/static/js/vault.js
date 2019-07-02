@@ -161,5 +161,5 @@ restexamples += 'curl --request PUT "https://' + localhost + '/api/vault/{huntNa
 restexamples += 'curl --request GET "https://' + localhost + '/api/vault/{huntName}"<br>';
 restexamples += 'curl --request DELETE "https://' + localhost + '/api/vault/{huntName}"<br>';
 restexamples += 'curl --request GET "https://' + localhost + '/api/vault/list"<br>';
-restexamples += 'curl --request GET "https://' + localhost + '/api/vault/setgethealthcheck"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/vault/healthcheck"<br>';
 $('#response-body-rest').append(restexamples);

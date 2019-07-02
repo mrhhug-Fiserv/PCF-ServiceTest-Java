@@ -21,21 +21,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/api/vault/")
 public class WebController {
 
-    @Autowired
+    @Autowired(required = false)
     private VaultTemplate vaultTemplate;
 
     @PutMapping("/api/vault/{huntName}/{startingCity}/{numberOfPaces}")
     public VaultResponse set(@PathVariable String huntName, @PathVariable String startingCity, @PathVariable String numberOfPaces) {
         System.out.println("PUT /api/vault/" + huntName + "/" + startingCity + "/" + numberOfPaces + " was called");
         TreasureHunt th = new TreasureHunt(startingCity, numberOfPaces);
-        return vaultTemplate.write(Static.root + "/" + huntName, th);
+        return vaultTemplate.write(VaultStatic.root + "/" + huntName, th);
     }
     
     @SuppressWarnings("null")
     @GetMapping("/api/vault/{huntName}")
     public VaultResponseSupport<TreasureHunt> get(@PathVariable String huntName) {
         System.out.println("GET /api/vault/" + huntName + " was called");
-        VaultResponseSupport<TreasureHunt> ret = vaultTemplate.read(Static.root + "/" + huntName, TreasureHunt.class);
+        VaultResponseSupport<TreasureHunt> ret = vaultTemplate.read(VaultStatic.root + "/" + huntName, TreasureHunt.class);
         HashMap<String, Object> myMap = new HashMap<>();
         myMap.put("", "");
         
@@ -59,24 +59,24 @@ public class WebController {
 	String numberOfPaces = "285";
         System.out.println("PUT /api/vault/" + huntName + "/" + startingCity + "/" + numberOfPaces + " was called");
         TreasureHunt th = new TreasureHunt(startingCity, numberOfPaces);
-        return vaultTemplate.write(Static.root + "/" + huntName, th);
+        return vaultTemplate.write(VaultStatic.root + "/" + huntName, th);
     }
 
     @GetMapping("/api/vault/list")
     public List<String> listKeys() {
         System.out.println("GET /api/vault/list was called");
-        return vaultTemplate.list(Static.root);
+        return vaultTemplate.list(VaultStatic.root);
     }
     
     @DeleteMapping("/api/vault/{huntName}")
     public void deletHunt(@PathVariable String huntName) {
         System.out.println("DELETE /api/vault/" + huntName + " was called");
-        vaultTemplate.delete(Static.root + "/" + huntName);
+        vaultTemplate.delete(VaultStatic.root + "/" + huntName);
     }
     
-    @GetMapping("/api/vault/setgethealthcheck")
-    public TreasureHunt setgethealthcheck() throws Exception {
-        System.out.println("GET /api/setgethealthcheck was called");
+    @GetMapping("/api/vault/healthcheck")
+    public TreasureHunt healthcheck() throws Exception {
+        System.out.println("GET /api/healthcheck was called");
         String name = UUID.randomUUID().toString();
         String city = UUID.randomUUID().toString();
         String paces = UUID.randomUUID().toString();

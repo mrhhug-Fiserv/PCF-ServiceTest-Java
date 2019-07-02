@@ -66,9 +66,9 @@ public class WebController {
         keyValueRepository.flushAll();
     }	
 
-    @GetMapping("/api/redis/setgethealthcheck")
-    public Map<String, String> sutgethealthcheck() throws Exception {
-        System.out.println("GET /api/redis/setgethealthcheck was called");
+    @GetMapping("/api/redis/healthcheck")
+    public Map<String, String> healthcheck() throws Exception {
+        System.out.println("GET /api/redis/healthcheck was called");
         String key = UUID.randomUUID().toString();
         String value = UUID.randomUUID().toString();
         set(key, value);

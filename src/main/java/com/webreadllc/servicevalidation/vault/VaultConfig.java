@@ -1,9 +1,10 @@
 package com.webreadllc.servicevalidation.vault;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import org.springframework.cloud.Cloud; 
+import org.springframework.cloud.CloudFactory;
 import java.net.URI;
-import java.util.Set;
+import io.pivotal.spring.cloud.vault.service.common.VaultServiceInfo;
+import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.vault.authentication.ClientAuthentication;
@@ -19,60 +20,49 @@ import org.springframework.vault.config.AbstractVaultConfiguration;
 @Configuration
 public class VaultConfig extends AbstractVaultConfiguration {
     
-    private String vault = "http://localhost:8200";
-    private String token = "UNABLE-TO-PARSE-VCAP_SERVICES";
+    //this should be comming form your manifest or ANYWHERE not hard coded like this
+    private String ServiceInstanceName = "PCF-Admins-Vault";
+	private boolean vaultWillFail = false;
     
     @Override
     public VaultEndpoint vaultEndpoint() {
-        return VaultEndpoint.from(URI.create(vault));
+		if(!vaultWillFail) {
+			Cloud cloud = new CloudFactory().getCloud();
+			VaultServiceInfo myService = (VaultServiceInfo) cloud.getServiceInfo(ServiceInstanceName);
+		
+			return VaultEndpoint.from(URI.create(myService.getUri()));
+		}
+		return VaultEndpoint.from(URI.create("https://unwilling"));
     }
 
     @Override
     public ClientAuthentication clientAuthentication() {
-        return new TokenAuthentication(token);
+		if(!vaultWillFail) {
+			Cloud cloud = new CloudFactory().getCloud();
+			VaultServiceInfo myService = (VaultServiceInfo) cloud.getServiceInfo(ServiceInstanceName);
+			
+			return new TokenAuthentication(new String(myService.getToken()));
+		}
+		return new TokenAuthentication("unwilling");
     }
     
     @PostConstruct
     public void init() {
-        try {
-            parseVcapSerices();
-        } catch (NullPointerException e) {
-            System.out.println("Vault is going to fail, but it will not fail fast - intentionally");
-        }
-           
-    }
-    
-    private void parseVcapSerices() {
-        String vcap_services = System.getenv("VCAP_SERVICES");
-        JsonObject o = new JsonParser().parse(vcap_services).getAsJsonObject();
-        String vaultKeyName = null;
-        Set<String> keys = o.keySet();
-        for( String i : keys) {
-            if( i.toLowerCase().contains("vault")) {
-                vaultKeyName = i;
-            }
-        }
-        JsonObject creds = o.get(vaultKeyName)
-                .getAsJsonArray()
-                .get(0)
-                .getAsJsonObject()
-                .get("credentials")
-                .getAsJsonObject();
-        try {
-            vault = creds.get("vault").getAsString();
-        } catch (NullPointerException e) {
-            //you are using the hashicorp broker
-            vault = creds.get("address").getAsString();
-        }
-        try {
-            Static.root = creds.get("root").getAsString();
-        } catch (NullPointerException e) {
-            Static.root = creds.get("backends").getAsJsonObject().get("generic").getAsString();
-        }
-        try {
-            token = creds.get("token").getAsString();
-        } catch (NullPointerException e) {
-            token = creds.get("auth").getAsJsonObject().get("token").getAsString();
-        }
+        Cloud cloud = new CloudFactory().getCloud();
+		try {
+				VaultServiceInfo myService = (VaultServiceInfo) cloud.getServiceInfo(ServiceInstanceName);
+				
+				//these next two lines are shameful
+				Object gener = (Object) myService.getBackends().get("generic");
+				ArrayList<String> ge = (ArrayList<String>) gener;
+
+				VaultStatic.root = ge.get(0);
+		} catch (Exception e) {
+			System.out.println("Vault is not going to work");
+			vaultWillFail = true;
+			System.out.println("Vault is not going to work");
+			System.out.println("Vault is not going to work");
+			System.out.println("Vault is not going to work");
+		}
     }
 }

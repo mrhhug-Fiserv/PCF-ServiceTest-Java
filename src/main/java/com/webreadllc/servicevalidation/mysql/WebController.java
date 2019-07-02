@@ -84,9 +84,9 @@ public class WebController {
 	bandMemberRepository.deleteAll();
     }
 
-    @GetMapping("/api/mysql/setgethealthcheck")
-    public BandMember setgethealthcheck() throws Exception {
-        System.out.println("GET /api/mysql/setgethealthcheck was called");
+    @GetMapping("/api/mysql/healthcheck")
+    public BandMember healthcheck() throws Exception {
+        System.out.println("GET /api/mysql/healthcheck was called");
         String name = UUID.randomUUID().toString();
         String specialty = UUID.randomUUID().toString();
         boolean isSinger = new Random().nextBoolean();

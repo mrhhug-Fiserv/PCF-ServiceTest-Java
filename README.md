@@ -1,5 +1,10 @@
 # PCF-ServiceTest-Java
 Unified PCF service test app. Written in Spring / Java.
+# Buidling
+```bash
+mvn package
+cf push
+```
 ## MySQL
 - Lazy initialized the database schema
 - Feature to create an row

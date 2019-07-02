@@ -202,5 +202,5 @@ restexamples += 'curl --request GET "https://' + localhost + '/api/mysql/{id}"<b
 restexamples += 'curl --request GET "https://' + localhost + '/api/mysql/*"<br>';
 restexamples += 'curl --request DELETE "https://' + localhost + '/api/mysql/{id}"<br>';
 restexamples += 'curl --request DELETE "https://' + localhost + '/api/mysql/*"<br>';
-restexamples += 'curl --request GET "https://' + localhost + '/api/mysql/setgethealthcheck"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/mysql/healthcheck"<br>';
 $('#response-body-rest').append(restexamples);

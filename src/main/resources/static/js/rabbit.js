@@ -126,5 +126,5 @@ restexamples += 'curl --request POST "https://' + localhost + '/api/rabbit/produ
 restexamples += 'curl --request POST "https://' + localhost + '/api/rabbit/consume"<br>';
 restexamples += 'curl --request POST "https://' + localhost + '/api/rabbit/consume/*"<br>';
 restexamples += 'curl --request GET "https://' + localhost + '/api/rabbit/count"<br>';
-restexamples += 'curl --request GET "https://' + localhost + '/api/rabbit/setgethealthcheck"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/rabbit/healthcheck"<br>';
 $('#response-body-rest').append(restexamples);

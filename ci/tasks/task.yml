@@ -1,0 +1,19 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: fiserv/clitools
+    tag: latest
+
+inputs:
+  - name: pcf-service-validation
+
+params:
+      PCF_ENV:
+      CF_API:
+      CF_USERNAME:
+      CF_PASSWORD:
+
+run:
+  path: pcf-service-validation/ci/tasks/task.sh

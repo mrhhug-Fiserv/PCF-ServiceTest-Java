@@ -20,6 +20,27 @@ $('#environment-display-btn').click(function() {
         datatype: 'text'
     });
 });
+$('#datetime-display-btn').click(function() {
+    var url="/api/datetime";
+    var method = 'GET';
+    console.log("Calling: " + method + " " + url);
+    $('#response-body-datetime').html('Calling REST endpoint');
+    $.ajax({
+        type: method,
+        url: url,
+        success: function(result){
+            $('#response-body-datetime').html(syntaxHighlight(result));
+        },
+        error: function(xhr, status, error) {
+            console.error("status: : " + status);
+            console.error("error: " + error);
+            console.error("xhr: " + xhr);
+            $('#response-body-datetime').html("ERROR! how could this every happen?!");
+        },
+        timeout: 7000,
+        datatype: 'text'
+    });
+});
 //https://stackoverflow.com/a/7220510
 function syntaxHighlight(json) {
     if (typeof json != 'string') {
@@ -45,4 +66,7 @@ function syntaxHighlight(json) {
 var localhost = window.location.hostname;
 var restexamples = '<h3>VCAP_SERVICES</h3><hr>';
 restexamples += 'curl --request GET "https://' + localhost + '/api/vcap_services"<br>';
+$('#response-body-rest').append(restexamples);
+var restexamples = '<h3>Datetime</h3><hr>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/datetime"<br>';
 $('#response-body-rest').append(restexamples);

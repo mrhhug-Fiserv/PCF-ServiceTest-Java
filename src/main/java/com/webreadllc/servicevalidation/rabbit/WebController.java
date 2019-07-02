@@ -77,9 +77,9 @@ public class WebController {
         return Integer.parseInt(amqpAdmin.getQueueProperties(Static.QUEUENAME).get("QUEUE_MESSAGE_COUNT").toString());
     }
     
-    @GetMapping("/api/rabbit/setgethealthcheck")
-    public Message setgethealthcheck() throws Exception {
-        System.out.println("GET /api/rabbit/setgethealthcheck was called");
+    @GetMapping("/api/rabbit/healthcheck")
+    public Message healthcheck() throws Exception {
+        System.out.println("GET /api/rabbit/healthcheck was called");
         String message = UUID.randomUUID().toString();
         System.out.println("Healthcheck about to produce " + message);
         int preProduceCount = count();

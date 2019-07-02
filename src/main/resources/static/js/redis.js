@@ -152,12 +152,12 @@ $('#redis-flushAll-btn').click(function() {
 
 var localhost = window.location.hostname;
 var restexamples = '<h3>Redis</h3><hr>';
-restexamples += 'curl -k -X GET "https://' + localhost + '/api/redis/get/{key}"<br>';
-restexamples += 'curl -k -X GET "https://' + localhost + '/api/redis/get/*"<br>';
-restexamples += 'curl -k -X GET "https://' + localhost + '/api/redis/info"<br>';
-restexamples += 'curl -k -X PUT "https://' + localhost + '/api/redis/set/{key}/{value}"<br>';
-restexamples += 'curl -k -X PUT "https://' + localhost + '/api/redis/random/{count};"<br>';
-restexamples += 'curl -k -X DELETE "https://' + localhost + '/api/redis/del/{key}"<br>';
-restexamples += 'curl -k -X DELETE "https://' + localhost + '/api/redis/del/*"<br>';
-restexamples += 'curl -k -X GET "https://' + localhost + '/api/redis/setgethealthcheck"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/redis/get/{key}"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/redis/get/*"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/redis/info"<br>';
+restexamples += 'curl --request PUT "https://' + localhost + '/api/redis/set/{key}/{value}"<br>';
+restexamples += 'curl --request PUT "https://' + localhost + '/api/redis/random/{count};"<br>';
+restexamples += 'curl --request DELETE "https://' + localhost + '/api/redis/del/{key}"<br>';
+restexamples += 'curl --request DELETE "https://' + localhost + '/api/redis/del/*"<br>';
+restexamples += 'curl --request GET "https://' + localhost + '/api/redis/healthcheck"<br>';
 $('#response-body-rest').append(restexamples);

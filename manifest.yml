@@ -3,6 +3,8 @@ applications:
 - name: servicevalidation
   memory: 1024M
   instances: 1
+  health-check-type: http
+  health-check-http-endpoint: /actuator/health
   buildpacks: 
     - java_buildpack_offline
   path: target/servicevalidation-0.0.1-SNAPSHOT.jar
